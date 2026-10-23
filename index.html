@@ -1,0 +1,721 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Contabilidad, impuestos, remuneraciones y asesoría tributaria para personas, emprendedores y pymes. Iquique, Chile.">
+<title>MC Contable &amp; Tributario</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#0A1F1C">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_CL">
+<meta property="og:site_name" content="MC Contable &amp; Tributario">
+<meta property="og:title" content="MC Contable &amp; Tributario · Contabilidad e impuestos">
+<meta property="og:description" content="Contabilidad mensual, impuestos, remuneraciones, Operación Renta y asesoría tributaria. Haz tu consulta gratis.">
+<meta property="og:url" content="https://mtcjmatti-crypto.github.io/mc-contable/">
+<meta property="og:image" content="https://mtcjmatti-crypto.github.io/mc-contable/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700;9..40,800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Mismo formato que MC Diseño & Marketing, en verde contable */
+:root{
+  --navy:#0A1F1C; --navy-2:#102A26; --line:#21413A;
+  --sky:#34D399; --sky-hi:#6EE7B7; --sky-ink:#052E26;
+  --fg:#F4FAF8; --muted:#A3BDB6;
+  --display:'DM Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{margin:0}
+img{max-width:100%}
+body{background:var(--navy);color:var(--fg);font-family:var(--display);font-size:16px;line-height:1.55;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1040px;margin:0 auto}
+a{color:var(--sky)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--sky);outline-offset:3px;border-radius:8px}
+h1,h2,h3{text-wrap:balance;margin:0}
+
+/* Logo: cuadrado redondeado + visto bueno (se escala con font-size) */
+.logo{font-size:120px;width:1em;height:1em;border-radius:.28em;background:var(--sky);display:grid;place-items:center;position:relative;flex:0 0 auto}
+.logo span{font-weight:800;font-size:.45em;letter-spacing:-.04em;color:var(--sky-ink);line-height:1}
+.logo i{position:absolute;right:-.08em;bottom:-.08em;width:.3em;height:.3em;border-radius:50%;background:var(--fg);border:.035em solid var(--navy)}
+.logo i::after{content:"";position:absolute;left:50%;top:44%;width:.065em;height:.12em;border-right:.028em solid var(--sky-ink);border-bottom:.028em solid var(--sky-ink);transform:translate(-50%,-50%) rotate(45deg)}
+
+/* Hero */
+.hero{padding-block:56px 48px;display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:center;border-bottom:1px solid var(--line)}
+.eyebrow{font-family:var(--mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.hero h1{font-size:clamp(36px,6vw,60px);font-weight:800;line-height:1.02;letter-spacing:-.025em;margin-top:6px}
+.hero p.lead{color:var(--muted);font-size:18px;max-width:54ch;margin:14px 0 22px}
+.actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 20px;border-radius:999px;font-weight:700;text-decoration:none;font-size:16px;min-height:48px}
+.btn-primary{background:var(--sky);color:var(--sky-ink)}
+.btn-primary:hover{background:var(--sky-hi)}
+.btn-ghost{color:var(--fg);border:1px solid var(--line)}
+.btn-ghost:hover{border-color:var(--sky)}
+
+/* Servicios */
+.intro{padding-block:40px 8px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;align-items:end}
+.intro h2{font-size:32px;font-weight:800;letter-spacing:-.02em}
+.intro p{color:var(--muted);margin:0;max-width:46ch}
+.row{display:grid;grid-template-columns:minmax(0,1fr) 130px 210px;gap:16px;align-items:baseline;padding-block:16px;border-bottom:1px solid var(--line)}
+.row .name{font-weight:700;font-size:18px}
+.row .desc{color:var(--muted);font-size:15px;margin-top:2px}
+.row .time,.row .price{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:15px}
+.row .time{color:var(--muted)}
+.row .price{text-align:right;font-weight:500}
+.row .price small{display:block;color:var(--muted);font-size:12px}
+.colhead{display:grid;grid-template-columns:minmax(0,1fr) 130px 210px;gap:16px;padding-top:12px;font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.colhead span:last-child{text-align:right}
+
+/* Urgente + condiciones */
+.pref{margin-block:48px 0;background:var(--sky);color:var(--sky-ink);border-radius:20px;padding:28px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:center}
+.pref h2{font-size:26px;font-weight:800;letter-spacing:-.015em}
+.pref p{margin:6px 0 0;max-width:58ch}
+.pref .big{font-family:var(--mono);font-size:40px;font-weight:500;line-height:1}
+.pref .big small{display:block;font-size:13px;margin-top:6px;text-align:right}
+.cond{padding-block:48px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px}
+.cond h2{font-size:24px;font-weight:800;margin-bottom:12px}
+.cond ul{margin:0;padding-left:20px;display:grid;gap:8px;color:var(--muted)}
+.cond li strong{color:var(--fg)}
+.contact{border-top:1px solid var(--line);padding-block:40px 56px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px;align-items:center}
+.contact dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px}
+.contact dt{font-family:var(--mono);font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.contact dd{margin:0;font-weight:500;user-select:all}
+.foot{color:var(--muted);font-size:13px;padding-bottom:104px}
+.foot a{white-space:nowrap}
+
+/* Consulta gratis (modal + botón flotante) */
+.cx-overlay{position:fixed;top:0;right:0;bottom:0;left:0;z-index:50;background:rgba(4,14,12,.62);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;
+  padding:calc(16px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) calc(16px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.cx{position:relative;width:100%;max-width:760px;max-height:100%;overflow:auto;background:var(--navy-2);border:1px solid var(--line);border-radius:22px;padding:28px;box-shadow:0 30px 80px rgba(0,0,0,.45)}
+.cx-close{position:absolute;top:14px;right:14px;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--fg);font:inherit;font-size:22px;line-height:1;cursor:pointer}
+.cx-close:hover{border-color:var(--sky)}
+#cx-body>h2:first-child{padding-right:52px}
+#cx-title:focus{outline:none}
+.cx-hello{display:flex;flex-direction:column;gap:16px;padding-right:40px}
+.cx-hello .logo{font-size:72px}.cx-hello .logo i{border-color:var(--navy-2)}
+.cx h2{font-size:clamp(26px,4.5vw,34px);font-weight:800;letter-spacing:-.02em;line-height:1.1}
+.cx .sub{color:var(--muted);margin:0;font-size:17px;max-width:54ch}
+.cx-list{margin:0;padding-left:20px;color:var(--muted);display:grid;gap:4px}
+.cx-top{display:flex;justify-content:space-between;gap:12px;align-items:baseline;padding-right:52px}
+.cx-tag{font-family:var(--mono);font-size:13px;color:var(--sky)}
+.bar{height:4px;background:var(--line);border-radius:4px;margin:14px 0 22px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--sky);transition:width .25s}
+.q{font-size:21px;font-weight:800;margin:0 0 6px;letter-spacing:-.01em}
+.qhint{color:var(--muted);font-size:15px;margin:0 0 16px}
+.opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(220px,100%),1fr));gap:10px}
+.opt{font:inherit;text-align:left;color:var(--fg);background:transparent;border:1px solid var(--line);border-radius:14px;padding:12px 14px;cursor:pointer;min-height:48px;display:flex;flex-direction:column;gap:2px}
+.opt:hover{border-color:var(--sky)}
+.opt[aria-pressed="true"]{border-color:var(--sky);background:rgba(52,211,153,.14)}
+.opt b{font-weight:700}
+.opt span{color:var(--muted);font-size:14px}
+.grp{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--sky);margin:18px 0 8px}
+.cx textarea,.cx input[type=text]{width:100%;font:inherit;color:var(--fg);background:var(--navy);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.cx textarea{min-height:100px;resize:vertical}
+.cx label{display:block;font-weight:700;margin:18px 0 8px}
+.cx-nav{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;margin-top:22px}
+button.btn{font:inherit;font-weight:700;border:0;cursor:pointer}
+button.btn-ghost{background:transparent;border:1px solid var(--line)}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.res-sum{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 18px}
+.chip{font-family:var(--mono);font-size:12px;padding:4px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.sol{border-top:1px solid var(--line);padding-block:16px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 20px}
+.sol h3{font-size:18px;font-weight:800;margin:0}
+.sol .fix{margin:0;color:var(--muted);font-size:14px}
+.sol .fix b{color:var(--fg);font-weight:500}
+.sol p{margin:0}
+.sol .ok{color:var(--sky);font-size:14px}
+.sol .meta{grid-column:2;grid-row:1/span 4;text-align:right;font-family:var(--mono);font-size:14px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.sol .meta small{display:block;color:var(--muted)}
+.sol>*:not(.meta){grid-column:1}
+.total{margin-top:6px;padding:16px 18px;border-radius:14px;background:var(--navy);display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;align-items:baseline}
+.total+.total{margin-top:8px}
+.total strong{font-family:var(--mono);font-size:22px;font-variant-numeric:tabular-nums}
+.note{color:var(--muted);font-size:14px;margin:12px 0 0}
+.fab{position:fixed;z-index:40;right:calc(16px + env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));display:flex;align-items:center;gap:10px;
+  padding:6px 18px 6px 6px;border-radius:999px;border:0;background:var(--sky);color:var(--sky-ink);font:inherit;font-weight:800;cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+.fab .dot{width:48px;height:48px;border-radius:14px;background:var(--navy);color:var(--sky);display:grid;place-items:center;font-size:20px;letter-spacing:-.04em}
+.fab:hover{background:var(--sky-hi)}
+
+/* Catálogo en tarjetas 3D */
+.cats{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(230px,100%),1fr));gap:16px;padding-block:24px 8px;perspective:1100px}
+.cat3d{position:relative;font:inherit;color:var(--fg);text-align:left;background:linear-gradient(155deg,#17403A 0%,#0D241F 100%);border:1px solid var(--line);border-radius:20px;padding:22px;min-height:210px;cursor:pointer;
+  transform-style:preserve-3d;transition:transform .18s ease-out,border-color .2s,box-shadow .2s;display:flex;flex-direction:column;gap:10px;box-shadow:0 14px 30px rgba(0,0,0,.25)}
+.cat3d:hover,.cat3d:focus-visible{border-color:var(--sky);box-shadow:0 22px 50px rgba(0,0,0,.4)}
+.cat3d .ico{width:64px;height:64px;border-radius:18px;background:rgba(52,211,153,.14);color:var(--sky);display:grid;place-items:center;transform:translateZ(46px)}
+.cat3d .ico svg{width:34px;height:34px}
+.cat3d .nm{font-size:20px;font-weight:800;letter-spacing:-.01em;line-height:1.2;transform:translateZ(32px)}
+.cat3d .ds{color:var(--muted);font-size:14px;line-height:1.4;transform:translateZ(22px)}
+.cat3d .ft{margin-top:auto;display:flex;flex-wrap:wrap;justify-content:space-between;gap:2px 10px;align-items:baseline;font-family:var(--mono);font-size:13px;transform:translateZ(26px)}
+.cat3d .ft b{color:var(--sky);font-weight:500;white-space:nowrap}
+.cat3d .ft span{white-space:nowrap;color:var(--muted)}
+.cat3d .glare{position:absolute;top:0;right:0;bottom:0;left:0;border-radius:inherit;pointer-events:none;background:radial-gradient(circle at var(--gx,30%) var(--gy,0%),rgba(255,255,255,.13),transparent 60%)}
+@keyframes flotar{0%,100%{transform:rotateX(5deg) rotateY(-7deg) translateY(0)}50%{transform:rotateX(-4deg) rotateY(7deg) translateY(-6px)}}
+@media (prefers-reduced-motion:no-preference){.cat3d.idle{animation:flotar 7s ease-in-out infinite}}
+.cat-view{padding-block:20px 8px}
+@media (prefers-reduced-motion:no-preference){.cat-view{animation:entra .28s ease-out}}
+@keyframes entra{from{opacity:.4;transform:translateY(10px)}to{opacity:1;transform:none}}
+.cat-bar{display:flex;gap:10px;align-items:center}
+.cat-back{flex:0 0 auto;font:inherit;font-weight:700;font-size:14px;color:var(--fg);background:transparent;border:1px solid var(--line);border-radius:999px;padding:10px 16px;min-height:44px;cursor:pointer}
+.cat-back:hover{border-color:var(--sky)}
+.cat-tabs{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 8px;min-width:0;scrollbar-width:thin;-webkit-overflow-scrolling:touch}
+.tab{flex:0 0 auto;font:inherit;font-size:14px;font-weight:700;color:var(--muted);background:transparent;border:1px solid var(--line);border-radius:999px;padding:8px 14px 8px 10px;display:inline-flex;gap:8px;align-items:center;cursor:pointer;min-height:44px;white-space:nowrap}
+.tab svg{width:20px;height:20px}
+.tab:hover{color:var(--fg);border-color:var(--sky)}
+.tab[aria-pressed="true"]{background:var(--sky);color:var(--sky-ink);border-color:var(--sky)}
+.cat-head{display:flex;gap:16px;align-items:center;margin:18px 0 6px}
+.cat-head .ico{flex:0 0 auto;width:60px;height:60px;border-radius:18px;background:rgba(52,211,153,.14);color:var(--sky);display:grid;place-items:center}
+.cat-head .ico svg{width:32px;height:32px}
+.cat-head h3{font-size:26px;font-weight:800;letter-spacing:-.02em}
+.cat-head p{margin:2px 0 0;color:var(--muted)}
+.cat-cta{margin-top:20px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding:18px;border:1px dashed var(--line);border-radius:16px}
+.cat-cta p{margin:0;color:var(--muted)}
+@media (max-width:720px){
+  .cats{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .cat3d{min-height:180px;padding:16px;border-radius:18px}
+  .cat3d .ico{width:52px;height:52px;border-radius:15px}.cat3d .ico svg{width:28px;height:28px}
+  .cat3d .nm{font-size:17px}
+  .cat3d .ds{display:none}
+  .cat3d .ft{flex-direction:column;gap:2px}
+  .cat-bar{flex-direction:column;align-items:stretch}
+  .cat-back{align-self:flex-start}
+  .cat-head h3{font-size:22px}
+  .cx{padding:22px 18px}
+  .sol{grid-template-columns:1fr}
+  .sol .meta{grid-column:1;grid-row:auto;text-align:left}
+  .fab{padding:6px}.fab .lbl{display:none}
+  .hero{grid-template-columns:1fr;padding-block:36px}
+  .hero .logo{font-size:88px}
+  .colhead{display:none}
+  .row{grid-template-columns:minmax(0,1fr);gap:4px}
+  .row .price{text-align:left}
+  .row .info{grid-column:1/-1}
+  .row .time::before{content:"Plazo: "}
+  .pref{grid-template-columns:1fr}
+  .pref .big small{text-align:left}
+  .cond{grid-template-columns:1fr}
+}
+@media (max-width:340px){.cats{grid-template-columns:1fr}}
+@media (min-width:721px){.cat-bar{align-items:flex-start}.cat-tabs{flex-wrap:wrap;overflow:visible}}
+@media (prefers-reduced-motion:no-preference){.btn{transition:background .15s,border-color .15s}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="hero">
+    <div class="logo" aria-hidden="true"><span>mc</span><i></i></div>
+    <div>
+      <div class="eyebrow">Iquique · Chile</div>
+      <h1>MC Contable &amp; Tributario</h1>
+      <p class="lead">Contabilidad mensual, impuestos, remuneraciones, Operación Renta y asesoría tributaria para personas, emprendedores y pymes. Tus números en orden y al día con el SII. Por Matías Condori.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="https://wa.me/56974629597?text=Hola%20Mat%C3%ADas%2C%20quiero%20cotizar%20un%20servicio%20contable" target="_blank" rel="noopener">Cotizar por WhatsApp</a>
+        <button type="button" class="btn btn-ghost" data-open-consulta>Consulta gratis</button>
+      </div>
+    </div>
+  </header>
+
+  <section id="servicios" aria-labelledby="t-serv">
+    <div class="intro">
+      <h2 id="t-serv">Servicios y precios</h2>
+      <p>Toca una categoría para ver sus servicios. Cada precio va del caso simple al más completo según volumen de documentos y trabajadores.</p>
+    </div>
+    <div id="catalogo"><noscript><p>Para ver los servicios y precios activa JavaScript, o escríbeme por WhatsApp al +56 9 7462 9597.</p></noscript></div>
+  </section>
+
+  <section class="pref" aria-labelledby="t-pref">
+    <div>
+      <h2 id="t-pref">¿Tienes un plazo encima? Trámite urgente</h2>
+      <p>Si el SII, el banco o una fecha límite te apura, pagas un recargo y tu trámite pasa al primer lugar de la fila.</p>
+    </div>
+    <div class="big">+30%<small>mínimo $20.000</small></div>
+  </section>
+
+  <section class="cond">
+    <div>
+      <h2>Cómo trabajamos</h2>
+      <ul>
+        <li><strong>Mensualidades:</strong> se pagan dentro de los primeros 5 días de cada mes.</li>
+        <li><strong>Trámites y proyectos:</strong> 50% al inicio y 50% al entregar.</li>
+        <li><strong>Documentos:</strong> me los envías hasta el día 5 de cada mes para declarar a tiempo.</li>
+        <li><strong>Atrasos:</strong> las multas por documentos entregados fuera de plazo son del cliente.</li>
+        <li><strong>Reserva:</strong> tu información se maneja con total confidencialidad.</li>
+      </ul>
+    </div>
+    <div>
+      <h2>Valores</h2>
+      <ul>
+        <li><strong>Brutos:</strong> se emite boleta de honorarios.</li>
+        <li><strong>Empresas:</strong> retienen el 15,25% al pagar.</li>
+        <li><strong>Reajuste:</strong> las mensualidades se ajustan por IPC una vez al año.</li>
+        <li><strong>Meses anteriores:</strong> la regularización de períodos atrasados se cotiza aparte.</li>
+        <li><strong>Cotización:</strong> válida por 15 días.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer class="contact">
+    <dl>
+      <dt>WhatsApp</dt><dd>+56 9 7462 9597</dd>
+      <dt>Instagram</dt><dd><a href="https://instagram.com/matti_w.w" target="_blank" rel="noopener">@matti_w.w</a></dd>
+      <dt>Correo</dt><dd>mtcj.matti@gmail.com</dd>
+    </dl>
+    <a class="btn btn-primary" href="https://wa.me/56974629597?text=Hola%20Mat%C3%ADas%2C%20quiero%20cotizar%20un%20servicio%20contable" target="_blank" rel="noopener">Escríbeme y cotizamos</a>
+  </footer>
+  <p class="foot">Valores referenciales en pesos chilenos, actualizados a octubre de 2026. ¿Necesitas una web, una app o inteligencia artificial? <a href="https://mtcjmatti-crypto.github.io/mc-dise-o/" target="_blank" rel="noopener">MC Diseño &amp; Marketing →</a></p>
+</div>
+  <div class="cx-overlay" id="cx-overlay">
+    <div class="cx" role="dialog" aria-modal="true" aria-labelledby="cx-title" id="cx">
+      <button type="button" class="cx-close" id="cx-close" aria-label="Cerrar consulta">×</button>
+      <div id="cx-body" aria-live="polite"></div>
+    </div>
+  </div>
+  <button type="button" class="fab" id="cx-fab" hidden aria-label="Abrir consulta gratis"><span class="dot">mc</span><span class="lbl">Consulta gratis</span></button>
+<script>
+(function(){
+  var WA = '56974629597';
+  var DISENO_URL = 'https://mtcjmatti-crypto.github.io/mc-dise-o/'; /* sitio de webs y apps */
+  var BIZ = ['emp','pyme','rest','serv'];
+  var TODOS = BIZ.concat(['per','crear']);
+  var PERFILES = [
+    {id:'per', t:'Persona natural', d:'Sueldo, honorarios, arriendos o inversiones'},
+    {id:'crear', t:'Voy a emprender', d:'Quiero formalizar mi negocio'},
+    {id:'emp', t:'Emprendimiento o microempresa', d:'Ya vendo y necesito ordenar mis impuestos'},
+    {id:'pyme', t:'Pyme con trabajadores', d:'Tengo local, ventas y personal'},
+    {id:'rest', t:'Restaurante o comercio', d:'Caja diaria, inventario y turnos'},
+    {id:'serv', t:'Profesional o servicios', d:'Independiente, consulta, taller u oficio'}
+  ];
+
+  /* Soluciones: t título, h qué hace, r resultado, p [mín, máx] CLP, pz plazo, m mensual, u unidad (c/u, hora…), x nota, ext lo hace MC Diseño */
+  var SOL = {
+    c_sin:{t:'Contabilidad sin movimiento', h:'F29 y libros al día para una empresa sin ventas.', r:'Evitas multas aunque no estés vendiendo.', p:[15000,25000], pz:'mensual', m:true},
+    c_emp:{t:'Plan contable Emprende', h:'Registro de compras y ventas, F29 y reporte mensual (hasta 50 documentos).', r:'Tus impuestos al día sin preocuparte.', p:[35000,60000], pz:'mensual', m:true},
+    c_pyme:{t:'Plan contable Pyme', h:'Contabilidad completa, F29, conciliación y estado de resultados trimestral (hasta 200 documentos).', r:'Sabes cuánto ganas y cumples con el SII.', p:[70000,120000], pz:'mensual', m:true},
+    c_full:{t:'Plan contable Empresa', h:'Más de 200 documentos, reportes mensuales y reunión de resultados.', r:'Decides con números claros cada mes.', p:[130000,250000], pz:'mensual', m:true},
+    hon:{t:'Boletas de honorarios y retenciones', h:'Emisión, registro y retenciones de tus boletas.', r:'Sin sorpresas en la renta.', p:[15000,30000], pz:'mensual', m:true},
+    f29:{t:'Declaración mensual F29', h:'IVA, PPM y retenciones declarados a tiempo.', r:'Cero multas e intereses por atraso.', p:[15000,30000], pz:'mensual', m:true},
+    f29atr:{t:'F29 atrasados', h:'Declaro los meses pendientes y reviso multas.', r:'Vuelves a estar al día con el SII.', p:[15000,25000], pz:'2–5 días', u:'por mes'},
+    dte:{t:'Facturación electrónica', h:'Puesta en marcha en el sistema del SII o en tu software.', r:'Emites facturas y boletas sin errores.', p:[25000,50000], pz:'1–3 días'},
+    remu:{t:'Remuneraciones mensuales', h:'Liquidaciones de sueldo, Previred y libro de remuneraciones electrónico.', r:'Sueldos y cotizaciones pagados bien y a tiempo.', p:[8000,12000], pz:'mensual', m:true, u:'por trabajador', x:'mínimo $25.000/mes'},
+    contrato:{t:'Contrato de trabajo o anexo', h:'Redacción según el Código del Trabajo.', r:'Relación laboral clara y protegida.', p:[15000,25000], pz:'1–2 días', u:'c/u'},
+    finiquito:{t:'Finiquito', h:'Cálculo de vacaciones, indemnizaciones y documento listo para firmar.', r:'Cierras la relación laboral sin errores.', p:[25000,50000], pz:'1–3 días', u:'c/u'},
+    vac:{t:'Cálculos laborales', h:'Vacaciones, horas extra, licencias e indemnizaciones.', r:'Pagas lo justo, ni más ni menos.', p:[15000,30000], pz:'1–2 días'},
+    reglamento:{t:'Reglamento interno', h:'Reglamento de orden, higiene y seguridad para tu empresa.', r:'Cumples la ley y ordenas al equipo.', p:[60000,120000], pz:'5–10 días'},
+    karin:{t:'Protocolo Ley Karin', h:'Protocolo de prevención del acoso laboral, sexual y violencia en el trabajo.', r:'Cumples con la Ley 21.643 y proteges al equipo.', p:[40000,80000], pz:'3–5 días'},
+    f22per:{t:'Renta persona (sueldo u honorarios)', h:'Reviso tu propuesta del SII y declaro tu F22.', r:'Recibes tu devolución completa.', p:[15000,35000], pz:'1–2 días'},
+    f22ext:{t:'Renta persona con varios ingresos', h:'Arriendos, inversiones, retiros o más de un empleador.', r:'Declaras bien y sin pagar de más.', p:[35000,70000], pz:'2–5 días'},
+    f22pyme:{t:'Operación Renta de empresa', h:'F22 y declaraciones juradas de tu empresa (Pro Pyme).', r:'Cierras el año tributario sin observaciones.', p:[80000,200000], pz:'abril', x:'régimen general: cotizar'},
+    dj:{t:'Declaración jurada', h:'DJ 1887, 1879, 1948 u otras que pida el SII.', r:'Cumples tus obligaciones anuales.', p:[15000,30000], pz:'1–2 días', u:'c/u'},
+    rect:{t:'Rectificación u observaciones de renta', h:'Reviso por qué el SII observó o retuvo tu devolución y lo corrijo.', r:'Recuperas tu devolución.', p:[25000,60000], pz:'3–7 días'},
+    emprende:{t:'Asesoría para emprender', h:'Qué tipo de empresa crear, régimen, costos y pasos a seguir.', r:'Partes bien desde el primer día.', p:[30000,50000], pz:'1 reunión'},
+    constituir:{t:'Creación de empresa (SpA o EIRL)', h:'Constitución en el Registro de Empresas y Sociedades y RUT.', r:'Tu empresa formal en pocos días.', p:[40000,80000], pz:'2–5 días'},
+    inicio:{t:'Inicio de actividades', h:'Inicio en el SII, giros correctos y autorización de documentos.', r:'Listo para emitir boletas y facturas.', p:[25000,50000], pz:'1–3 días'},
+    regimen:{t:'Elección o cambio de régimen', h:'Comparo Pro Pyme general, transparente u otro y hago el trámite.', r:'Pagas lo que corresponde, no más.', p:[30000,60000], pz:'2–5 días'},
+    patente:{t:'Patente municipal', h:'Solicitud o renovación y declaración de capital propio.', r:'Funcionas con todos los permisos.', p:[30000,60000], pz:'3–10 días'},
+    modificar:{t:'Modificación de sociedad', h:'Cambio de socios, capital, giro o administración.', r:'Tu empresa al día con la realidad.', p:[40000,90000], pz:'3–7 días'},
+    termino:{t:'Término de giro', h:'Balance de término, F22 y trámite de cierre en el SII.', r:'Cierras la empresa sin deudas pendientes.', p:[120000,300000], pz:'10–30 días'},
+    balance:{t:'Balance general anual', h:'Balance de 8 columnas y estados financieros del año.', r:'Tienes los papeles que piden bancos y socios.', p:[60000,150000], pz:'5–10 días'},
+    eerr:{t:'Estado de resultados', h:'Ingresos, costos y ganancia del período.', r:'Sabes si tu negocio gana o pierde.', p:[30000,60000], pz:'3–5 días', u:'c/u'},
+    concil:{t:'Conciliación bancaria', h:'Cuadro tu banco con la contabilidad movimiento por movimiento.', r:'Detectas errores y pagos perdidos.', p:[20000,50000], pz:'mensual', m:true},
+    flujo:{t:'Flujo de caja proyectado', h:'Entradas y salidas de los próximos 6 a 12 meses.', r:'Te anticipas a meses difíciles.', p:[40000,80000], pz:'3–5 días'},
+    carpeta:{t:'Carpeta para el banco', h:'Carpeta tributaria, balance e informes para pedir crédito.', r:'Llegas al banco con todo en regla.', p:[25000,50000], pz:'1–3 días'},
+    costos:{t:'Análisis de costos y precios', h:'Costo real de tus productos o servicios y margen.', r:'Cada venta te deja ganancia.', p:[40000,80000], pz:'3–7 días'},
+    regconta:{t:'Contabilidad atrasada', h:'Pongo al día los meses que quedaron sin registrar.', r:'Tu contabilidad completa y ordenada.', p:[30000,60000], pz:'según meses', u:'por mes'},
+    notif:{t:'Respuesta al SII', h:'Notificaciones, citaciones o requerimientos: reviso y respondo.', r:'Resuelves el problema antes de que crezca.', p:[40000,120000], pz:'3–10 días'},
+    convenio:{t:'Deudas y convenio de pago', h:'Reviso tus deudas fiscales y gestiono el convenio en Tesorería.', r:'Pagas en cuotas y frenas los intereses.', p:[25000,50000], pz:'2–5 días'},
+    hora:{t:'Asesoría contable o tributaria', h:'Reunión para resolver tus dudas puntuales.', r:'Decides informado.', p:[25000,40000], pz:'a convenir', u:'hora'},
+    plan:{t:'Planificación tributaria anual', h:'Revisión del año y medidas legales para optimizar impuestos.', r:'Pagas menos impuestos sin riesgos.', p:[80000,200000], pz:'5–10 días'},
+    arqueo:{t:'Arqueo y control de caja', h:'Revisión sorpresa de caja y formato de cuadratura diaria.', r:'Sabes si falta plata y por qué.', p:[30000,60000], pz:'1 día', u:'c/u'},
+    inventario:{t:'Toma de inventario', h:'Conteo, valorización y cuadre con la contabilidad.', r:'Sabes cuánto tienes de verdad.', p:[60000,150000], pz:'1–5 días'},
+    auditoria:{t:'Revisión de control interno', h:'Reviso caja, compras, ventas y personal para detectar fugas.', r:'Encuentras dónde se pierde la plata.', p:[100000,250000], pz:'7–15 días'},
+    procedimientos:{t:'Manual de procedimientos', h:'Cómo se hace cada proceso: caja, compras, pagos y rendiciones.', r:'Todos trabajan igual y con control.', p:[60000,120000], pz:'7–10 días'},
+    appmc:{t:'App de gastos, stock o boletas', h:'Lo hago en MC Diseño & Marketing: apps que registran gastos, stock o boletas solas.', p:[0,0], pz:'', ext:true}
+  };
+
+  /* Áreas y problemas: s solución, f perfiles (por defecto, los del área) */
+  var AREAS = [
+    {id:'crear', t:'Emprender y formalizar', f:['crear','per','emp','serv'], p:[
+      {id:'e1', t:'No sé qué tipo de empresa crear (SpA, EIRL o persona natural)', s:'emprende'},
+      {id:'e2', t:'Quiero crear mi empresa', s:'constituir'},
+      {id:'e3', t:'Necesito hacer el inicio de actividades', s:'inicio'},
+      {id:'e4', t:'No sé qué régimen tributario me conviene', s:'regimen'},
+      {id:'e5', t:'Necesito sacar o renovar la patente municipal', s:'patente', f:['crear','emp','serv']},
+      {id:'e6', t:'Quiero emitir facturas o boletas electrónicas', s:'dte', f:['crear','emp','serv']}
+    ]},
+    {id:'mes', t:'Contabilidad e impuestos del mes', f:BIZ, p:[
+      {id:'k1', t:'No tengo contador o el mío no responde', s:'c_emp', f:['emp','serv']},
+      {id:'k1b', t:'No tengo contador o el mío no responde', s:'c_pyme', f:['pyme','rest']},
+      {id:'k2', t:'Mi empresa no tiene movimiento pero igual debo declarar', s:'c_sin'},
+      {id:'k3', t:'Mi negocio creció y necesito contabilidad completa', s:'c_pyme', f:['emp','serv']},
+      {id:'k3b', t:'Tengo más de 200 documentos al mes', s:'c_full', f:['pyme','rest']},
+      {id:'k4', t:'Se me olvida declarar el IVA (F29)', s:'f29'},
+      {id:'k5', t:'Tengo F29 atrasados', s:'f29atr'},
+      {id:'k6', t:'Quiero emitir facturas electrónicas', s:'dte', f:['emp','pyme','rest','serv']}
+    ]},
+    {id:'remu', t:'Sueldos y trabajadores', f:BIZ, p:[
+      {id:'r1', t:'Hago las liquidaciones de sueldo a mano', s:'remu'},
+      {id:'r2', t:'Me cuesta pagar Previred y el libro de remuneraciones', s:'remu'},
+      {id:'r3', t:'Necesito contratos de trabajo o anexos', s:'contrato'},
+      {id:'r4', t:'Tengo que hacer un finiquito', s:'finiquito'},
+      {id:'r5', t:'No sé calcular vacaciones, horas extra o indemnizaciones', s:'vac'},
+      {id:'r6', t:'No tengo reglamento interno', s:'reglamento', f:['pyme','rest']},
+      {id:'r7', t:'No tengo protocolo de la Ley Karin', s:'karin'}
+    ]},
+    {id:'renta', t:'Operación Renta', f:TODOS, p:[
+      {id:'t1', t:'Necesito declarar mi renta (sueldo u honorarios)', s:'f22per', f:['per','serv','crear']},
+      {id:'t2', t:'Tengo arriendos, inversiones o varios ingresos', s:'f22ext', f:['per','serv']},
+      {id:'t3', t:'Mi empresa debe hacer la Operación Renta', s:'f22pyme', f:BIZ},
+      {id:'t4', t:'Me piden declaraciones juradas', s:'dj', f:BIZ},
+      {id:'t5', t:'El SII observó o retuvo mi devolución', s:'rect'},
+      {id:'t6', t:'Emito boletas de honorarios y no entiendo las retenciones', s:'hon', f:['per','serv']}
+    ]},
+    {id:'fin', t:'Números y estados financieros', f:BIZ.concat(['per']), p:[
+      {id:'b1', t:'No sé si mi negocio gana o pierde', s:'eerr', f:BIZ},
+      {id:'b2', t:'El banco me pide papeles para un crédito', s:'carpeta'},
+      {id:'b3', t:'Necesito el balance anual', s:'balance', f:BIZ},
+      {id:'b4', t:'Mi banco no cuadra con la contabilidad', s:'concil', f:BIZ},
+      {id:'b5', t:'No sé si me alcanza la plata los próximos meses', s:'flujo', f:BIZ},
+      {id:'b6', t:'No sé si mis precios cubren mis costos', s:'costos', f:BIZ}
+    ]},
+    {id:'sii', t:'SII, deudas y cierre', f:TODOS, p:[
+      {id:'s1', t:'Me llegó una notificación o citación del SII', s:'notif'},
+      {id:'s2', t:'Tengo deudas con Tesorería y quiero repactar', s:'convenio'},
+      {id:'s3', t:'Mi contabilidad está atrasada varios meses', s:'regconta', f:BIZ},
+      {id:'s4', t:'Quiero cerrar mi empresa (término de giro)', s:'termino', f:BIZ},
+      {id:'s5', t:'Quiero cambiar socios, capital o giro', s:'modificar', f:BIZ}
+    ]},
+    {id:'ases', t:'Asesoría y decisiones', f:TODOS, p:[
+      {id:'a1', t:'Quiero pagar menos impuestos de forma legal', s:'plan', f:BIZ},
+      {id:'a2', t:'Tengo dudas puntuales y quiero consultar', s:'hora'},
+      {id:'a3', t:'Quiero cambiar de régimen tributario', s:'regimen', f:BIZ},
+      {id:'a4', t:'Mezclo la plata personal con la del negocio', s:'hora', f:BIZ}
+    ]},
+    {id:'ctrl', t:'Control interno', f:['emp','pyme','rest'], p:[
+      {id:'x1', t:'Falta plata en la caja', s:'arqueo'},
+      {id:'x2', t:'No sé cuánto inventario tengo realmente', s:'inventario'},
+      {id:'x3', t:'Sospecho errores o pérdidas en el negocio', s:'auditoria', f:['pyme','rest']},
+      {id:'x4', t:'Cada uno hace las cosas a su manera', s:'procedimientos', f:['pyme','rest']},
+      {id:'x5', t:'Quiero una app que registre gastos, stock o boletas', s:'appmc'}
+    ]}
+  ];
+  var PMAP = {}, AMAP = {};
+  AREAS.forEach(function(a){ AMAP[a.id]=a; a.p.forEach(function(p){ p.a=a.id; if(!p.f) p.f=a.f; PMAP[p.id]=p; }); });
+
+  /* Palabras clave del comentario libre → problema (se usa el primero que calce con el perfil) */
+  var CLAVES = [
+    [/\bspa\b|eirl|qu[eé] (tipo de )?empresa/i,['e1']], [/crear (una |mi )?empresa|formalizar/i,['e2']], [/inicio de actividades|iniciar actividades/i,['e3']],
+    [/r[eé]gimen|pro ?pyme|transparente/i,['e4','a3']], [/patente/i,['e5']], [/factura|boleta electr/i,['e6','k6']],
+    [/\bcontador|contabilidad/i,['k1','k1b']], [/sin movimiento/i,['k2']], [/\biva\b|\bf ?29\b|\bppm\b/i,['k4']], [/atrasad/i,['k5','s3']],
+    [/liquidaci|previred|sueldos?\b|remuneraci/i,['r1']], [/contratos?\b|anexo/i,['r3']], [/finiquito|despid/i,['r4']],
+    [/vacaciones|horas extra|indemniz|licencia/i,['r5']], [/reglamento/i,['r6']], [/karin|acoso/i,['r7']],
+    [/\brenta\b|\bf ?22\b|devoluci/i,['t1','t3']], [/arriendo|inversion|acciones|dividendo/i,['t2']], [/declaraci[oó]n(es)? jurada|\bdj\b/i,['t4']],
+    [/retuv|observ/i,['t5']], [/honorarios|retenci/i,['t6']],
+    [/ganancia|gano|pierdo|utilidad/i,['b1']], [/banco|cr[eé]dito|pr[eé]stamo/i,['b2']], [/balance/i,['b3']], [/cuadra|conciliaci/i,['b4']],
+    [/flujo de caja|alcanza la plata|no me alcanza/i,['b5']], [/precios|costos/i,['b6']],
+    [/notificaci|citaci|requerimiento|fiscaliza/i,['s1']], [/deuda|tesorer|convenio|repactar|\btgr\b/i,['s2']], [/t[eé]rmino de giro|cerrar (la |mi )?empresa/i,['s4']],
+    [/socio|capital|cambiar (el )?giro/i,['s5']], [/pagar menos|planificaci|optimiz/i,['a1']], [/duda|consulta/i,['a2']], [/plata personal|mezclo/i,['a4']],
+    [/\bcaja\b|falta plata|faltante/i,['x1']], [/inventario|stock|bodega/i,['x2']], [/robo|p[eé]rdidas?|errores/i,['x3']], [/\bapp\b|aplicaci[oó]n|automatiz/i,['x5']]
+  ];
+  var URG = [
+    {id:'sin', t:'Sin apuro', d:'Cuando se pueda'},
+    {id:'mes', t:'Este mes', d:'Antes del próximo vencimiento'},
+    {id:'ya', t:'Es urgente', d:'Tengo un plazo encima'}
+  ];
+
+  var st, cuenta = 0;
+  function reset(){ st = {paso:0, perfil:null, areas:[], probs:[], urg:null, com:'', nombre:''}; }
+  reset();
+
+  var ov = document.getElementById('cx-overlay'), body = document.getElementById('cx-body'), fab = document.getElementById('cx-fab'), pushed = false;
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function clp(n){return '$'+String(n).replace(/\B(?=(\d{3})+(?!\d))/g,'.');}
+  function rango(p,m,u){return (p[0]===p[1]?clp(p[0]):clp(p[0])+' – '+clp(p[1]))+(u?' '+u:'')+(m?' / mes':'');}
+  function opt(id,t,d,on){return '<button type="button" class="opt" data-id="'+id+'" aria-pressed="'+(on?'true':'false')+'"><b>'+esc(t)+'</b>'+(d?'<span>'+esc(d)+'</span>':'')+'</button>';}
+  function puede(p){return p.f.indexOf(st.perfil)>-1;}
+  function areasPerfil(){return AREAS.filter(function(a){return a.p.some(puede);});}
+
+  function abrir(){
+    ov.hidden = false; fab.hidden = true; document.body.style.overflow='hidden'; document.documentElement.style.overflow='hidden';
+    if(!pushed){ try{ history.pushState({consulta:1},''); pushed=true; }catch(e){} }
+    render(); setTimeout(function(){ if(st.paso===0){ var b=body.querySelector('button'); if(b) b.focus(); } else { arriba(); } },30);
+  }
+  function cerrar(desdeAtras){
+    guardar(); ov.hidden = true; fab.hidden = false; document.body.style.overflow=''; document.documentElement.style.overflow='';
+    if(pushed && !desdeAtras){ pushed=false; try{ history.back(); }catch(e){} } else { pushed=false; }
+    fab.focus();
+  }
+  window.addEventListener('popstate', function(){ if(!ov.hidden) cerrar(true); });
+  document.addEventListener('keydown', function(e){
+    if(ov.hidden) return;
+    if(e.key==='Escape' || e.key==='Esc'){ cerrar(false); return; }
+    if(e.key==='Tab'){
+      var f = Array.prototype.filter.call(document.getElementById('cx').querySelectorAll('button,a[href],textarea,input'), function(el){ return !el.disabled && el.offsetParent!==null; });
+      if(!f.length) return;
+      var first=f[0], last=f[f.length-1];
+      if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); }
+      else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
+      else if(!document.getElementById('cx').contains(document.activeElement)){ e.preventDefault(); first.focus(); }
+    }
+  });
+  document.getElementById('cx-close').addEventListener('click', function(){ cerrar(false); });
+  ov.addEventListener('click', function(e){ if(e.target===ov) cerrar(false); });
+  fab.addEventListener('click', abrir);
+  document.addEventListener('click', function(e){ var b = e.target.closest && e.target.closest('[data-open-consulta]'); if(b) abrir(); });
+
+  /* Orden en el informe: puntuales, mensuales, servicio aparte */
+  function tipo(s){ return SOL[s].ext ? 2 : (SOL[s].m ? 1 : 0); }
+  function resultado(){
+    var orden = [], grupos = {}, vistos = {};
+    function add(pid, why){
+      var p = PMAP[pid]; if(!p || vistos[pid]) return; vistos[pid]=1; cuenta++;
+      if(!grupos[p.s]){ grupos[p.s] = {s:p.s, probs:[]}; orden.push(p.s); }
+      grupos[p.s].probs.push(why || p.t);
+    }
+    cuenta = 0;
+    st.probs.forEach(function(pid){ add(pid); });
+    CLAVES.forEach(function(k){
+      if(!st.com || !k[0].test(st.com)) return;
+      var ids = k[1].filter(function(id){ return puede(PMAP[id]); });
+      var id = ids.length ? ids[0] : k[1][0];
+      if(!vistos[id] && !k[1].some(function(x){return vistos[x];})) add(id, PMAP[id].t+' (lo que me contaste)');
+    });
+    orden.sort(function(a,b){ return tipo(a)-tipo(b); });
+    return orden.map(function(s){return grupos[s];});
+  }
+
+  function nav(back, nextTxt, nextOff){
+    return '<div class="cx-nav">'+(back?'<button type="button" class="btn btn-ghost" data-act="back">Atrás</button>':'<span></span>')+
+      '<button type="button" class="btn btn-primary" data-act="next"'+(nextOff?' disabled':'')+'>'+nextTxt+'</button></div>';
+  }
+  function cabecera(n){
+    return '<div class="cx-top"><h2 id="cx-title" style="font-size:20px">Consulta gratis</h2><span class="cx-tag">Paso '+n+' de 4</span></div>'+
+      '<div class="bar" aria-hidden="true"><i style="width:'+(n*25)+'%"></i></div>';
+  }
+
+  function render(){
+    var h = '';
+    if(st.paso===0){
+      h = '<div class="cx-hello"><div class="logo" aria-hidden="true"><span>mc</span><i></i></div>'+
+        '<h2 id="cx-title">Haz una consulta gratis y ordena tus impuestos</h2>'+
+        '<p class="sub">Responde unas preguntas rápidas sobre tu situación. Al final te digo qué servicio contable o tributario necesitas, qué resuelve y cuánto cuesta.</p>'+
+        '<ul class="cx-list"><li>Contabilidad e impuestos mensuales</li><li>Sueldos, finiquitos y Operación Renta</li><li>Trámites, SII y asesoría tributaria</li></ul>'+
+        '<div class="actions"><button type="button" class="btn btn-primary" data-act="next">Comenzar consulta</button><button type="button" class="btn btn-ghost" data-act="skip">Omitir</button></div>'+
+        '<p class="note" style="margin:0">Toma 1 minuto. Puedes volver cuando quieras con el botón flotante.</p></div>';
+    } else if(st.paso===1){
+      h = cabecera(1)+'<p class="q">¿Quién eres?</p><p class="qhint">Elige la opción que más se parece a ti.</p><div class="opts" data-tipo="perfil">'+
+        PERFILES.map(function(p){return opt(p.id,p.t,p.d,st.perfil===p.id);}).join('')+'</div>'+nav(false,'Siguiente',!st.perfil);
+    } else if(st.paso===2){
+      h = cabecera(2)+'<p class="q">¿En qué áreas necesitas ayuda?</p><p class="qhint">Marca todas las que quieras. Si no sabes, sigue y te muestro todo.</p><div class="opts" data-tipo="areas">'+
+        areasPerfil().map(function(a){return opt(a.id,a.t,'',st.areas.indexOf(a.id)>-1);}).join('')+'</div>'+nav(true, st.areas.length?'Siguiente':'Ver todo');
+    } else if(st.paso===3){
+      var as = areasPerfil().filter(function(a){return !st.areas.length || st.areas.indexOf(a.id)>-1;});
+      h = cabecera(3)+'<p class="q">¿Qué te está pasando?</p><p class="qhint">Marca todo lo que aplique. Si no está, en el siguiente paso me lo cuentas con tus palabras.</p>';
+      as.forEach(function(a){
+        h += '<p class="grp">'+esc(a.t)+'</p><div class="opts" data-tipo="probs">'+a.p.filter(puede).map(function(p){return opt(p.id,p.t,'',st.probs.indexOf(p.id)>-1);}).join('')+'</div>';
+      });
+      h += nav(true, st.probs.length?'Siguiente':'Omitir');
+    } else if(st.paso===4){
+      h = cabecera(4)+'<p class="q">¿Para cuándo lo necesitas?</p><div class="opts" data-tipo="urg">'+
+        URG.map(function(u){return opt(u.id,u.t,u.d,st.urg===u.id);}).join('')+'</div>'+
+        '<label for="cx-com">Cuéntame tu situación con tus palabras (opcional)</label>'+
+        '<textarea id="cx-com" placeholder="Ej.: tengo 3 trabajadores, hago los sueldos a mano y tengo F29 atrasados">'+esc(st.com)+'</textarea>'+
+        '<label for="cx-nom">Tu nombre (opcional)</label><input type="text" id="cx-nom" value="'+esc(st.nombre)+'" autocomplete="given-name">'+
+        nav(true,'Ver mi diagnóstico');
+    } else {
+      h = informe();
+    }
+    body.innerHTML = h;
+  }
+
+  function informe(){
+    var lista = resultado(), min=0, max=0, mes=[0,0], unid=false, n=0;
+    var nombre = st.nombre ? esc(st.nombre)+', ' : '';
+    if(!lista.length){
+      return '<h2 id="cx-title">Necesito saber un poco más</h2><p class="sub" style="margin-top:10px">No alcancé a detectar un caso concreto. Escríbeme y lo vemos juntos en 5 minutos.</p>'+
+        '<div class="actions" style="margin-top:20px"><a class="btn btn-primary" target="_blank" rel="noopener" href="https://wa.me/'+WA+'?text='+encodeURIComponent('Hola Matías, hice la consulta contable en tu sitio y quiero conversar sobre mi caso.')+'">Hablar con un asesor</a>'+
+        '<button type="button" class="btn btn-ghost" data-act="reset">Empezar de nuevo</button></div>';
+    }
+    n = cuenta;
+    var externos = lista.filter(function(g){return SOL[g.s].ext;});
+    lista = lista.filter(function(g){return !SOL[g.s].ext;});
+    var areasDet = {};
+    st.probs.forEach(function(pid){ areasDet[AMAP[PMAP[pid].a].t]=1; });
+    var h = '<h2 id="cx-title">'+nombre+(nombre?'detecté ':'Detecté ')+n+' punto'+(n>1?'s':'')+' a resolver'+(lista.length?' y te puedo ayudar con '+lista.length+' servicio'+(lista.length>1?'s':''):'')+'</h2>'+
+      '<div class="res-sum">'+Object.keys(areasDet).map(function(a){return '<span class="chip">'+esc(a)+'</span>';}).join('')+'</div>';
+    lista.forEach(function(g){
+      var s = SOL[g.s];
+      if(s.m){ mes[0]+=s.p[0]; mes[1]+=s.p[1]; } else { min+=s.p[0]; max+=s.p[1]; }
+      if(s.u) unid=true;
+      h += '<div class="sol"><h3>'+esc(s.t)+'</h3>'+
+        '<p class="fix">Resuelve: <b>'+g.probs.map(esc).join(' · ')+'</b></p>'+
+        '<p>'+esc(s.h)+'</p><p class="ok">Así: '+esc(s.r)+'</p>'+
+        '<div class="meta">'+rango(s.p,s.m,s.u)+(s.x?'<small>'+esc(s.x)+'</small>':'')+'<small>Plazo: '+esc(s.pz)+'</small></div></div>';
+    });
+    externos.forEach(function(g){
+      var s = SOL[g.s];
+      h += '<div class="sol"><h3>'+esc(s.t)+'</h3><p class="fix">Sobre: <b>'+g.probs.map(esc).join(' · ')+'</b></p><p>'+esc(s.h)+'</p>'+
+        '<p><a target="_blank" rel="noopener" href="'+DISENO_URL+'">Ver MC Diseño &amp; Marketing</a></p><div class="meta">Servicio aparte</div></div>';
+    });
+    if(max){ h += '<div class="total"><span>Trámites y servicios puntuales</span><strong>'+clp(min)+' – '+clp(max)+'</strong></div>'; }
+    if(mes[1]){ h += '<div class="total"><span>Servicio mensual</span><strong>'+rango(mes,true)+'</strong></div>'; }
+    var notas = [];
+    if(unid) notas.push('Los valores “por trabajador”, “por mes” o “c/u” se multiplican según tu caso.');
+    if(st.urg==='ya') notas.push('Con trámite urgente (+30%, mínimo $20.000) tu caso pasa primero.');
+    notas.push('Valores brutos. Si contratas varios servicios, se arma un plan con mejor precio.');
+    h += '<p class="note">'+notas.join(' ')+'</p>'+
+      '<p class="sub" style="margin-top:16px;font-size:16px">Esto es una estimación automática. Para un valor exacto, presiona <b>Cotizar con asesor</b> y me llega todo tu diagnóstico por WhatsApp.</p>';
+
+    var perfil = (PERFILES.filter(function(p){return p.id===st.perfil;})[0]||{}).t||'';
+    var L = ['Hola Matías'+(st.nombre?', soy '+st.nombre:'')+'. Hice la consulta contable gratis en tu sitio.', 'Perfil: '+perfil, '', 'NECESIDADES Y SERVICIOS PROPUESTOS:'];
+    lista.forEach(function(g,i){
+      var s=SOL[g.s];
+      L.push((i+1)+'. '+s.t+' — '+rango(s.p,s.m,s.u)+(s.x?' ('+s.x+')':'')+' (plazo '+s.pz+')');
+      L.push('   Resuelve: '+g.probs.join('; '));
+    });
+    externos.forEach(function(g){ L.push('+ Interés en: '+SOL[g.s].t+' (MC Diseño)'); });
+    L.push('');
+    if(max) L.push('Puntuales: '+clp(min)+' – '+clp(max));
+    if(mes[1]) L.push('Mensual: '+rango(mes,true));
+    if(st.urg) L.push('Plazo: '+URG.filter(function(u){return u.id===st.urg;})[0].t);
+    if(st.com) L.push('En mis palabras: '+st.com);
+    L.push('', 'Quiero una cotización exacta.');
+    if(encodeURIComponent(L.join('\n')).length > 3500){
+      L = L.filter(function(x){ return x.indexOf('   Resuelve: ')!==0; });
+      L.splice(2, 0, 'Marqué '+n+' puntos en '+Object.keys(areasDet).length+' áreas (detalle en la consulta).');
+    }
+    h += '<div class="actions" style="margin-top:18px"><a class="btn btn-primary" target="_blank" rel="noopener" href="https://wa.me/'+WA+'?text='+encodeURIComponent(L.join('\n'))+'">Cotizar con asesor</a>'+
+      '<button type="button" class="btn btn-ghost" data-act="edit">Corregir respuestas</button><button type="button" class="btn btn-ghost" data-act="reset">Empezar de nuevo</button></div>';
+    return h;
+  }
+
+  function arriba(){
+    var t=document.getElementById('cx-title');
+    if(t){ t.setAttribute('tabindex','-1'); try{ t.focus({preventScroll:true}); }catch(e){ t.focus(); } }
+    document.getElementById('cx').scrollTop=0;
+  }
+  function guardar(){
+    var c=document.getElementById('cx-com'), n=document.getElementById('cx-nom');
+    if(c) st.com=c.value.trim();
+    if(n) st.nombre=n.value.trim();
+  }
+  body.addEventListener('click', function(e){
+    var b = e.target.closest('button'); if(!b) return;
+    var act = b.getAttribute('data-act');
+    if(b.classList.contains('opt')){
+      var tp = b.parentNode.getAttribute('data-tipo'), id = b.getAttribute('data-id'), arr;
+      if(tp==='perfil'){ if(st.perfil!==id){ st.areas=[]; st.probs=[]; } st.perfil=id; }
+      else if(tp==='urg'){ guardar(); st.urg=id; }
+      else { arr = tp==='areas'?st.areas:st.probs; var i=arr.indexOf(id); if(i>-1) arr.splice(i,1); else arr.push(id); }
+      render(); var nb=body.querySelector('.opt[data-id="'+id+'"]'); if(nb) nb.focus();
+      return;
+    }
+    if(act==='skip'){ cerrar(false); return; }
+    if(act==='reset'){ reset(); st.paso=1; render(); arriba(); return; }
+    if(act==='edit'){ st.paso=3; render(); arriba(); return; }
+    if(act==='next'){ guardar();
+      if(st.paso===2 && st.areas.length){ st.probs = st.probs.filter(function(pid){ return st.areas.indexOf(PMAP[pid].a)>-1; }); }
+      st.paso++; render(); arriba(); return; }
+    if(act==='back'){ guardar(); st.paso--; render(); arriba(); }
+  });
+
+  /* ===== Catálogo en tarjetas 3D ===== */
+  function ico(d){ return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+d+'</svg>'; }
+  var ICO = {
+    libro: ico('<path d="M4 4.5A1.5 1.5 0 0 1 5.5 3H20v15H5.5A1.5 1.5 0 0 0 4 19.5z"/><path d="M4 19.5A1.5 1.5 0 0 0 5.5 21H20M8 7h8M8 11h6"/>'),
+    imp: ico('<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 15l6-6"/><circle cx="9.5" cy="9.5" r="1"/><circle cx="14.5" cy="14.5" r="1"/>'),
+    rrhh: ico('<circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17.5" cy="9" r="2.5"/><path d="M16 14.2c2.9-.3 5 2 5 4.8"/>'),
+    renta: ico('<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="M8.5 15l2 2 4-4"/>'),
+    emp: ico('<path d="M4 21V8l8-5 8 5v13"/><path d="M9 21v-6h6v6M3 21h18"/>'),
+    fin: ico('<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>'),
+    sii: ico('<path d="M12 3l8 3v5c0 5-3.4 8.6-8 10-4.6-1.4-8-5-8-10V6z"/><path d="M12 8v5M12 16h.01"/>'),
+    ases: ico('<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.9A8 8 0 1 1 21 12z"/><path d="M9 10.5h6M9 13.5h4"/>'),
+    ctrl: ico('<circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5M8.5 11l1.8 1.8 3.4-3.4"/>'),
+    per: ico('<circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.9 3.1-7 7-7s7 3.1 7 7"/>')
+  };
+  function deSol(k){ var s=SOL[k]; return {t:s.t,h:s.h,pz:s.pz,p:s.p,m:s.m,u:s.u,x:s.x}; }
+  var CATS = [
+    {id:'mes', i:'libro', t:'Contabilidad mensual', d:'Planes según el tamaño de tu negocio.', items:['c_sin','c_emp','c_pyme','c_full','concil'].map(deSol)},
+    {id:'imp', i:'imp', t:'Impuestos mensuales', d:'IVA, F29, boletas y facturación.', items:['f29','f29atr','hon','dte'].map(deSol)},
+    {id:'remu', i:'rrhh', t:'Remuneraciones y personal', d:'Sueldos, contratos, finiquitos y leyes laborales.', items:['remu','contrato','finiquito','vac','reglamento','karin'].map(deSol)},
+    {id:'renta', i:'renta', t:'Operación Renta', d:'Tu F22 y el de tu empresa, cada abril.', items:['f22per','f22ext','f22pyme','dj','rect'].map(deSol)},
+    {id:'crear', i:'emp', t:'Crear y formalizar empresa', d:'De la idea a emitir tu primera factura.', items:['emprende','constituir','inicio','regimen','patente','modificar','termino'].map(deSol)},
+    {id:'fin', i:'fin', t:'Estados financieros', d:'Balance, resultados y papeles para el banco.', items:['balance','eerr','flujo','carpeta','costos'].map(deSol)},
+    {id:'sii', i:'sii', t:'SII y regularización', d:'Notificaciones, deudas y meses atrasados.', items:['notif','convenio','regconta','f29atr'].map(deSol)},
+    {id:'ases', i:'ases', t:'Asesoría tributaria', d:'Decisiones claras y menos impuestos, de forma legal.', items:['hora','emprende','plan','regimen'].map(deSol)},
+    {id:'ctrl', i:'ctrl', t:'Auditoría y control interno', d:'Caja, inventario y fugas de dinero.', items:['arqueo','inventario','auditoria','procedimientos'].map(deSol)},
+    {id:'per', i:'per', t:'Personas naturales', d:'Sueldo, honorarios, arriendos y créditos.', items:['f22per','f22ext','hon','rect','carpeta','hora'].map(deSol)}
+  ];
+  function precioItem(x){ return rango(x.p,x.m,x.u)+(x.x?'<small>'+esc(x.x)+'</small>':''); }
+  function desde(c){ var v = c.items.filter(function(x){return x.p && x.p[0];}).map(function(x){return x.p[0];}); return v.length ? 'desde '+clp(Math.min.apply(null,v)) : ''; }
+  var catBox = document.getElementById('catalogo'), catActual = null, catPushed = false;
+  var animar = !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+  function verTodas(){
+    catActual = null;
+    catBox.innerHTML = '<div class="cats">'+CATS.map(function(c,i){
+      return '<button type="button" class="cat3d idle" data-cat="'+c.id+'" style="animation-delay:-'+(i*0.9)+'s" aria-label="'+esc(c.t)+': ver '+c.items.length+' servicios">'+
+        '<span class="glare" aria-hidden="true"></span><span class="ico">'+ICO[c.i]+'</span><span class="nm">'+esc(c.t)+'</span><span class="ds">'+esc(c.d)+'</span>'+
+        '<span class="ft"><b>'+c.items.length+' servicio'+(c.items.length>1?'s':'')+'</b><span>'+desde(c)+'</span></span></button>';
+    }).join('')+'</div>';
+  }
+  function verCat(id, desdeAtras){
+    var c = CATS.filter(function(x){return x.id===id;})[0]; if(!c) return;
+    var primera = !catActual;
+    catActual = id;
+    catBox.innerHTML = '<div class="cat-view"><div class="cat-bar"><button type="button" class="cat-back" data-cat-back>← Todas</button>'+
+      '<div class="cat-tabs" role="toolbar" aria-label="Categorías">'+CATS.map(function(x){return '<button type="button" class="tab" data-tab="'+x.id+'" aria-pressed="'+(x.id===id)+'">'+ICO[x.i]+esc(x.t)+'</button>';}).join('')+'</div></div>'+
+      '<div class="cat-head"><span class="ico">'+ICO[c.i]+'</span><div><h3 id="cat-title" tabindex="-1">'+esc(c.t)+'</h3><p>'+esc(c.d)+'</p></div></div>'+
+      '<div class="colhead" aria-hidden="true"><span>Servicio</span><span>Plazo</span><span>Precio (CLP)</span></div>'+
+      c.items.map(function(x){return '<div class="row"><div class="info"><div class="name">'+esc(x.t)+'</div><div class="desc">'+esc(x.h)+'</div></div><div class="time">'+esc(x.pz)+'</div><div class="price">'+precioItem(x)+'</div></div>';}).join('')+
+      '<div class="cat-cta"><p>¿No sabes cuál necesitas? Te lo digo en 1 minuto.</p><button type="button" class="btn btn-primary" data-open-consulta>Hacer la consulta gratis</button></div></div>';
+    var tab = catBox.querySelector('.tab[aria-pressed="true"]');
+    if(tab && tab.scrollIntoView){ try{ tab.scrollIntoView({block:'nearest',inline:'center'}); }catch(e){} }
+    if(primera && !desdeAtras && !catPushed){ try{ history.pushState({cat:1},''); catPushed=true; }catch(e){} }
+    var sec = document.getElementById('servicios'); if(sec && sec.getBoundingClientRect().top<0){ sec.scrollIntoView({block:'start'}); }
+    var h = document.getElementById('cat-title'); if(h){ try{ h.focus({preventScroll:true}); }catch(e){} }
+  }
+  function cerrarCat(desdeAtras){
+    var vuelta = catActual;
+    verTodas();
+    if(catPushed && !desdeAtras){ catPushed=false; try{ history.back(); }catch(e){} } else { catPushed=false; }
+    var b = catBox.querySelector('[data-cat="'+vuelta+'"]'); if(b) b.focus({preventScroll:false});
+  }
+  window.addEventListener('popstate', function(){ if(catActual && ov.hidden && !(history.state && history.state.cat)){ catPushed=false; cerrarCat(true); } });
+  catBox.addEventListener('click', function(e){
+    var b = e.target.closest('button'); if(!b) return;
+    if(b.hasAttribute('data-cat')){ verCat(b.getAttribute('data-cat')); return; }
+    if(b.hasAttribute('data-tab')){ verCat(b.getAttribute('data-tab')); return; }
+    if(b.hasAttribute('data-cat-back')){ cerrarCat(false); }
+  });
+  /* Inclinación 3D al pasar el mouse */
+  function inclinar(e){
+    if(e.pointerType==='touch') return;
+    var card = e.target.closest && e.target.closest('.cat3d'); if(!card || !animar) return;
+    var r = card.getBoundingClientRect(), x=(e.clientX-r.left)/r.width, y=(e.clientY-r.top)/r.height;
+    card.classList.remove('idle');
+    card.style.transform = 'rotateX('+((0.5-y)*16).toFixed(1)+'deg) rotateY('+((x-0.5)*18).toFixed(1)+'deg) translateZ(8px)';
+    card.style.setProperty('--gx',(x*100).toFixed(0)+'%'); card.style.setProperty('--gy',(y*100).toFixed(0)+'%');
+  }
+  function soltar(e){
+    var card = e.target.closest && e.target.closest('.cat3d'); if(!card) return;
+    if(e.relatedTarget && card.contains(e.relatedTarget)) return;
+    card.style.transform=''; card.classList.add('idle');
+  }
+  if(window.PointerEvent){ catBox.addEventListener('pointermove', inclinar); catBox.addEventListener('pointerout', soltar); catBox.addEventListener('pointercancel', soltar); }
+  else { catBox.addEventListener('mousemove', inclinar); catBox.addEventListener('mouseout', soltar); }
+  verTodas();
+
+  abrir();
+})();
+</script>
+</body>
+</html>
